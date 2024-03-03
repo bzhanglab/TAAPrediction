@@ -15,6 +15,6 @@
 - [Output](#output)
 - [Other functions](#Other-functions)
   - [Protein evaluation](#quantification-for-tmt-dataset)
-  - [Kinase activity score inference](#kinase-activity-score-inference) 
+  - [Cellular localization](#cellular-localization) 
 - [Contact](#contact)
 - [References](#references)
