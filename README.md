@@ -12,9 +12,6 @@
   - [Download example data](#download-example-data)
   - [Run TAAPrediction](#run-taaprediction)
 - [Output](#output)
-- [Other functions](#Other-functions)
-  - [Protein evaluation](#quantification-for-tmt-dataset)
-  - [Cellular localization](#cellular-localization) 
 - [Contact](#contact)
 - [References](#references)
 
@@ -39,3 +36,26 @@ DeepRescore2
 ### Run TAAPrediction
 - Please open the program files in order, modify the input file paths, and run using the R language
 
+## Output
+
+TAAPrediction will output results of each step, including
+* GTEx_ExpressPosterior
+* TCGA_ExpressPosterior
+* HCC_ExpressPosterior
+* Data_GTEx_ExpressMatrix
+* Data_TCGA_ExpressMatrix
+* Data_HCC_ExpressMatrix
+* MaxTPMForCertainProbability_GTEx
+* MaxTPMForCertainProbability_TCGA
+* MaxTPMForCertainProbability_HCC
+* Data_DormantGenes
+* Data_CancerGenes_TCGA
+* Data_CancerGenes_HCC
+
+## Contact
+
+Xinpei Yi - [@yixinpei](https://twitter.com/yixinpei) - yixinpei13@gmail.com
+<br/>Project Link: [https://github.com/bzhanglab/DeepRescore2](https://github.com/bzhanglab/DeepRescore2)
+<br/>Lab Website: [bingzhang-Lab BCM](https://www.zhang-lab.org/)
+
+## References
