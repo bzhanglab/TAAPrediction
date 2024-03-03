@@ -3,24 +3,18 @@
 
 <img src="Image/Pipeline.png" alt="Logo" width="390" align = "right">
 
-Tumor-associated antigens (TAAs), which are scarcely present in normal tissues but notably elevated in tumors, hold significant promise for immunotherapy. Gene expression databases such as Gene Expression Omnibus (GTEx) for normal tissues and Cancer Genome Atlas (TCGA) for tumor tissues enable systematic evaluation of gene expression states in both normal and cancerous conditions, facilitating the identification of TAAs. Existing statistical methods focus on tissue-level gene expression state inference, limiting their utility in identifying specific tumors for personalized treatments. Conversely, single-sample analysis often relies on a fixed threshold method, which struggles to effectively handle measurement noise. To overcome these challenges, we developed a novel Bayesian algorithm for inferring gene expression states in individual samples, which outperformed the fixed threshold method in our comparative evaluation. We incorporated this algorithm into a computational workflow to identify candidate TAAs and associated tumor samples. Applying this workflow to RNA-seq data from GTEx and TCGA, we identified 212 candidate TAAs across 33 cancer types, 78 of which showed significant expression in multiple cancer types. Validation in an independent liver cancer cohort confirmed 48 of the 54 TAAs predicted from TCGA liver cancer data, with 10 further corroborated through proteomics. We computationally predicted that 38 peptide sequences derived from these 10 TAAs would have a high binding affinity for HLA-A02, the most prevalent HLA allele in humans. Experimental validation confirmed significant binding affinity and immunogenicity for 21 of these peptides. In both TCGA and the independent cohort, about 64% of samples expressed one or more TAAs associated with these 21 peptides, making them promising candidates for developing peptide vaccines or TCR-T cell-based therapies targeting liver cancer. This study underscores the effectiveness of combining computational analyses with experimental validations in discovering and confirming TAAs for immunotherapy.
+**Tumor-associated antigens (TAAs)**, which are scarcely present in normal tissues but notably elevated in tumors, hold significant promise for immunotherapy. Gene expression databases such as Gene Expression Omnibus (GTEx) for normal tissues and Cancer Genome Atlas (TCGA) for tumor tissues enable systematic evaluation of gene expression states in both normal and cancerous conditions, facilitating the identification of TAAs. Existing statistical methods focus on tissue-level gene expression state inference, limiting their utility in identifying specific tumors for personalized treatments. Conversely, single-sample analysis often relies on a fixed threshold method, which struggles to effectively handle measurement noise. To overcome these challenges, we developed a novel Bayesian algorithm for inferring gene expression states in individual samples, which outperformed the fixed threshold method in our comparative evaluation. We incorporated this algorithm into a computational workflow to identify candidate TAAs and associated tumor samples. Applying this workflow to RNA-seq data from GTEx and TCGA, we identified 212 candidate TAAs across 33 cancer types, 78 of which showed significant expression in multiple cancer types. Validation in an independent liver cancer cohort confirmed 48 of the 54 TAAs predicted from TCGA liver cancer data, with 10 further corroborated through proteomics. We computationally predicted that 38 peptide sequences derived from these 10 TAAs would have a high binding affinity for HLA-A02, the most prevalent HLA allele in humans. Experimental validation confirmed significant binding affinity and immunogenicity for 21 of these peptides. In both TCGA and the independent cohort, about 64% of samples expressed one or more TAAs associated with these 21 peptides, making them promising candidates for developing peptide vaccines or TCR-T cell-based therapies targeting liver cancer. This study underscores the effectiveness of combining computational analyses with experimental validations in discovering and confirming TAAs for immunotherapy.
 
 ## Contents
 
-- [Directory structure of DeepRescore2](#directory-structure-of-deeprescore2)
-- [Customize environment for DeepRescore2](#customize-environment-for-deeprescore2)
-  - [Our DeepRescore2 environment](#our-DeepRescore2-environment)
-  - [Computational Time](#computational-time)
-  - [Installation](#installation)
-  - [Data type](#data-type)
+- [Directory structure of TAAPrediction](#directory-structure-of-taaprediction)
 - [Usage](#usage)
   - [Download example data](#download-example-data)
   - [Directory structure of input](#directory-structure-of-input) 
-  - [Parameters of DeepRescore2](#parameters-of-deeprescore2)
-  - [Run DeepRescore2](#run-deeprescore2)
+  - [Run TAAPrediction](#run-taaprediction)
 - [Output](#output)
 - [Other functions](#Other-functions)
-  - [Quantification for TMT dataset](#quantification-for-tmt-dataset)
+  - [Protein evaluation](#quantification-for-tmt-dataset)
   - [Kinase activity score inference](#kinase-activity-score-inference) 
 - [Contact](#contact)
 - [References](#references)
