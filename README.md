@@ -55,7 +55,7 @@ TAAPrediction will output results of each step, including
 ## Contact
 
 Xinpei Yi - [@yixinpei](https://twitter.com/yixinpei) - yixinpei13@gmail.com
-<br/>Project Link: [https://github.com/bzhanglab/DeepRescore2](https://github.com/bzhanglab/DeepRescore2)
+<br/>Project Link: [https://github.com/bzhanglab/TAAPrediction](https://github.com/bzhanglab/TAAPrediction)
 <br/>Lab Website: [bingzhang-Lab BCM](https://www.zhang-lab.org/)
 
 ## References
