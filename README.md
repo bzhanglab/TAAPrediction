@@ -10,7 +10,6 @@
 - [Directory structure of TAAPrediction](#directory-structure-of-taaprediction)
 - [Usage](#usage)
   - [Download example data](#download-example-data)
-  - [Directory structure of input](#directory-structure-of-input) 
   - [Run TAAPrediction](#run-taaprediction)
 - [Output](#output)
 - [Other functions](#Other-functions)
@@ -18,3 +17,25 @@
   - [Cellular localization](#cellular-localization) 
 - [Contact](#contact)
 - [References](#references)
+
+## Directory structure of DeepRescore2
+```
+DeepRescore2
+|---Script
+|---|---1.GTExExpressionStateInference
+|---|---2.TCGAExpressionStateInference
+|---|---3.HCCExpressionStateInference
+|---|---4.DormantGenePrediction.R
+|---|---5.CancerGenePrediction_TCGA.R
+|---|---6.CancerGenePrediction_HCC.R
+```
+- **Script** implements TAAPrediction to identify candidate TAAs and associated tumor samples.
+
+## Usage
+
+### Download example data
+- Please go to https://zenodo.org/records/10049730 and download **GTExTissueData.zip (54 normal tissue RNA-seq data)**, **TCGATumorTissueData.zip (33 tumor tissues RNA-seq data)**, **HCCTumorTissueData.zip (HCC tumor tissue RNA-seq data)** used in our manuscript. Unzip these files as the input for TAAPrediction. 
+
+### Run TAAPrediction
+- Please open the program files in order, modify the input file paths, and run using the R language
+
