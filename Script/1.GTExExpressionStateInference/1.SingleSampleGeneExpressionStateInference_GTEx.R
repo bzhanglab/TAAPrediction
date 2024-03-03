@@ -17,13 +17,18 @@ Tissues = c('Adipose - Subcutaneous','Adipose - Visceral (Omentum)','Adrenal Gla
             'Small Intestine - Terminal Ileum','Spleen','Stomach','Testis','Thyroid','Uterus','Vagina','Whole Blood'
             )
 
-GTEX_Data_Path = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/GTExTissueData'
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/CodingGeneList/CodingGenes.txt'
-HouseKeepingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/HouseKeepingGeneList/HK_genes.txt'
-Pathout = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test'
+GTEX_Data_Path = 'D:/Project/TumorAntigen/TestData/GTExTissueData'
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes.txt'
+HouseKeepingGenes_pathin = 'D:/Project/TumorAntigen/TestData/HouseKeepingGeneList/HouseKeepingGeneList/HK_genes.txt'
+Pathout = 'D:/Project/TumorAntigen/TestData/Results'
 
-#for (t in 1:length(Tissues)){
-for (t in 2:2){
+folder_path = paste0(Pathout,'/','GTEx_ExpressPosterior')
+if (!file.exists(folder_path)){
+  dir.create(folder_path)
+}
+
+for (t in 1:length(Tissues)){
+#for (t in 1:1){
   
   Tissue = Tissues[t]
   
@@ -131,7 +136,7 @@ for (t in 2:2){
   ExpressPosterior = 1 - Allpi0f0/(Allpi0f0+Allpi1f1)
   nonExpressPosterior = Allpi0f0/(Allpi0f0+Allpi1f1)
   
-  write.table(ExpressPosterior, file = paste0(Pathout,'/',Tissue,'.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+  write.table(ExpressPosterior, file = paste0(folder_path,'/',Tissue,'.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
   
 }
 

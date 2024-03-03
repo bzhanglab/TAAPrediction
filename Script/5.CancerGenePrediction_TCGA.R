@@ -1,5 +1,10 @@
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes.txt'
+CancerGenes_Pathin = 'D:/Project/TumorAntigen/TestData/Data_CancerGenes_TCGA/Data_CancerGenes_TCGA/CancerGenesRatio_Pro_0_5.txt'
+DormantGenes_Pathin = 'D:/Project/TumorAntigen/TestData/Data_DormantGenes/Data_DormantGenes/DormantGenesRatio_Pro_0_5.txt'
+
+DormantGenes_Pathout = 'D:/Project/TumorAntigen/TestData/Results/Data_DormantGenes'
+CancerGenes_Pathout = 'D:/Project/TumorAntigen/TestData/Results/Data_CancerGenes_TCGA'
 ##########################################################
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/2.DormantGeneIdentification/Data/CodingGenes_Gencode/CodingGenes.txt'
 CodingGenesData = read.delim(CodingGenes_pathin, header = TRUE, row.names = 1, sep = "\t")
 name = c()
 for (i in 1:length(rownames(CodingGenesData))){
@@ -8,8 +13,7 @@ for (i in 1:length(rownames(CodingGenesData))){
 CodingGenesData$gene_name2 = name
 ##########################################################
 
-pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Data/Data_CancerGenes_TCGA/CancerGenesCount_Pro_0_5.txt'
-CancerGenesCount = read.delim(pathin, header = TRUE, row.names = 1, sep = "\t")
+CancerGenesCount = read.delim(CancerGenes_Pathin, header = TRUE, row.names = 1, sep = "\t")
 name = c()
 for (i in 1:length(rownames(CancerGenesCount))){
   name[i] = unlist(strsplit(rownames(CancerGenesCount)[i],"[.]"))[[1]]
@@ -18,8 +22,7 @@ rownames(CancerGenesCount) = name
 
 # Dormant Genes:
 
-pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/2.DormantGeneIdentification/Data/Data_DormantGenes/DormantGenesRatio_Pro_0_5.txt'
-DormantGenesRatio = read.delim(pathin, header = TRUE, row.names = 1, sep = "\t")
+DormantGenesRatio = read.delim(DormantGenes_Pathin, header = TRUE, row.names = 1, sep = "\t")
 DormantGenesRatio$Testis <- NULL
 
 names = c()
@@ -50,11 +53,11 @@ DormantGenes = rownames(DormantGenesRatio3)[DormantGenesRatio3[,1]>=RatioThresho
 DormantGenes = setdiff(DormantGenes,'ENSG00000213588')
 DormantGenes = setdiff(DormantGenes,'ENSG00000124610')
 DormantGenes = setdiff(DormantGenes,'ENSG00000278677')
-write.table(DormantGenes, file = paste('/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/2.DormantGeneIdentification/Data/Data_DormantGenes/','DormantGenes_Ratio_Multiply_0_9','.txt',sep=''), sep = "\t",row.names = FALSE,quote = FALSE)
-write.table(setdiff(rownames(DormantGenesRatio3),DormantGenes), file = paste('/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/2.DormantGeneIdentification/Data/Data_DormantGenes/','RemainingGenes_Ratio_Multiply_0_9','.txt',sep=''), sep = "\t",row.names = FALSE,quote = FALSE)
+write.table(DormantGenes, file = paste0(DormantGenes_Pathout,'/','DormantGenes_Ratio_Multiply_0_9','.txt'), sep = "\t",row.names = FALSE,quote = FALSE)
+write.table(setdiff(rownames(DormantGenesRatio3),DormantGenes), file = paste0(DormantGenes_Pathout,'/','RemainingGenes_Ratio_Multiply_0_9','.txt'), sep = "\t",row.names = FALSE,quote = FALSE)
 #========================================================#
 
-pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Data/Data_CancerGenes_TCGA/CancerGenesRatio_Pro_0_5.txt'
+pathin = CancerGenes_Pathin
 CancerGenesRatio = read.delim(pathin, header = TRUE, row.names = 1, sep = "\t")
 
 names = c()
@@ -107,7 +110,7 @@ Genes_20 = Genes_20[setdiff(rownames(Genes_20),'ENSG00000124610'),]
 Genes_20 = Genes_20[setdiff(rownames(Genes_20),'ENSG00000278677'),]
 Genes_20 = Genes_20[setdiff(rownames(Genes_20),'ENSG00000101812'),]
 #=======================Store data=======================#
-write.table(Genes_20, file = paste('/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Data/Data_CancerGenes_TCGA/CancerGenes/','Ratio_Multiply_0_9_0_2_noHistone','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+write.table(Genes_20, file = paste0(CancerGenes_Pathout,'/','Ratio_Multiply_0_9_0_2_noHistone','.txt'), sep = "\t",row.names = TRUE,quote = FALSE)
 #======================Draw figure=======================#
 CancerGenesCount2 = CancerGenesCount[rownames(Genes_20),]
 rownames(CancerGenesCount2) = CodingGenesData2[rownames(CancerGenesCount2),]$gene_name
@@ -120,7 +123,7 @@ for (i in 1:nrow(CancerGenesCount2)){
 }
 Data <- data.frame(Antigen, CancerType, Frequency)
 
-pdf("/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Pics/Ratio_Multiply_0_9_0_2_noHistone_TCGA.pdf",width=7,height=13,paper='special') 
+pdf(paste0(CancerGenes_Pathout,'/','Ratio_Multiply_0_9_0_2_noHistone_TCGA.pdf'),width=7,height=13,paper='special') 
 library(ggplot2)
 ggplot(Data, aes(x = reorder(Antigen,Frequency), y = Frequency, fill = CancerType)) +
   geom_bar(stat = "identity") + 
@@ -164,7 +167,7 @@ Genes_10 = Genes_10[setdiff(rownames(Genes_10),'ENSG00000124610'),]
 Genes_10 = Genes_10[setdiff(rownames(Genes_10),'ENSG00000278677'),]
 Genes_10 = Genes_10[setdiff(rownames(Genes_10),'ENSG00000101812'),]
 #=======================Store data=======================#
-write.table(Genes_10, file = paste('/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Data/Data_CancerGenes_TCGA/CancerGenes/','Ratio_Multiply_0_9_0_1_noHistone','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+write.table(Genes_10, file = paste0(CancerGenes_Pathout,'/','Ratio_Multiply_0_9_0_1_noHistone','.txt'), sep = "\t",row.names = TRUE,quote = FALSE)
 #======================Draw figure=======================#
 CancerGenesCount2 = CancerGenesCount[rownames(Genes_10),]
 rownames(CancerGenesCount2) = CodingGenesData2[rownames(CancerGenesCount2),]$gene_name
@@ -177,7 +180,7 @@ for (i in 1:nrow(CancerGenesCount2)){
 }
 Data <- data.frame(Antigen, CancerType, Frequency)
 
-pdf("/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Pics/Ratio_Multiply_0_9_0_1_noHistone_TCGA.pdf",width=7,height=13,paper='special') 
+pdf(paste0(CancerGenes_Pathout,'/','Ratio_Multiply_0_9_0_1_noHistone_TCGA.pdf'),width=7,height=13,paper='special') 
 library(ggplot2)
 ggplot(Data, aes(x = reorder(Antigen,Frequency), y = Frequency, fill = CancerType)) +
   geom_bar(stat = "identity") + 
@@ -221,7 +224,7 @@ Genes_5 = Genes_5[setdiff(rownames(Genes_5),'ENSG00000124610'),]
 Genes_5 = Genes_5[setdiff(rownames(Genes_5),'ENSG00000278677'),]
 Genes_5 = Genes_5[setdiff(rownames(Genes_5),'ENSG00000101812'),]
 #=======================Store data=======================#
-write.table(Genes_5, file = paste('/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Data/Data_CancerGenes_TCGA/CancerGenes/','Ratio_Multiply_0_9_0_0_5_noHistone','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+write.table(Genes_5, file = paste0(CancerGenes_Pathout,'/','Ratio_Multiply_0_9_0_0_5_noHistone','.txt'), sep = "\t",row.names = TRUE,quote = FALSE)
 #======================Draw figure=======================#
 CancerGenesCount2 = CancerGenesCount[rownames(Genes_5),]
 rownames(CancerGenesCount2) = CodingGenesData2[rownames(CancerGenesCount2),]$gene_name
@@ -234,7 +237,7 @@ for (i in 1:nrow(CancerGenesCount2)){
 }
 Data <- data.frame(Antigen, CancerType, Frequency)
 
-pdf("/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/4.CancerGeneIdentification/Pics/Ratio_Multiply_0_9_0_0_5_noHistone_TCGA.pdf",width=7,height=13,paper='special') 
+pdf(paste0(CancerGenes_Pathout,'/','Ratio_Multiply_0_9_0_0_5_noHistone_TCGA.pdf'),width=7,height=13,paper='special') 
 library(ggplot2)
 ggplot(Data, aes(x = reorder(Antigen,Frequency), y = Frequency, fill = CancerType)) +
   geom_bar(stat = "identity") + 

@@ -1,10 +1,17 @@
 library(ggplot2)
 library(mclust)
 
-ExpressionProFilePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HCC_ExpressPosterior'
-TPMFilePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HCCTumorTissueData'
-MaxTPMForCertainProbability_HCC_Pathout = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/MaxTPMForCertainProbability_HCC'
-ThresholdSelectionPics_HCC = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/3.HCCExpressionStateInference/test'
+ExpressionProFilePath = 'D:/Project/TumorAntigen/TestData/Results/HCC_ExpressPosterior'
+TPMFilePath = 'D:/Project/TumorAntigen/TestData/HCCTumorTissueData/HCCTumorTissueData'
+
+Pathout = 'D:/Project/TumorAntigen/TestData/Results'
+
+MaxTPMForCertainProbability_HCC_Pathout = paste0(Pathout,'/','MaxTPMForCertainProbability_HCC')
+if (!file.exists(MaxTPMForCertainProbability_HCC_Pathout)){
+  dir.create(MaxTPMForCertainProbability_HCC_Pathout)
+}
+
+ThresholdSelectionPics_HCC = MaxTPMForCertainProbability_HCC_Pathout
 
 MaxTPM = c()
 CancerType = c()
@@ -17,7 +24,6 @@ Warning_TPM = c()
 Warning_Clust = c()
 numrlt = 0
 for (i in 1:length(FileNames)){
-#for (i in 9:9){
   FileName = FileNames[i]
   
   Cancer = gsub(".ExpressPosterior.txt", "", FileName)

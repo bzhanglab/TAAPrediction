@@ -9,13 +9,18 @@ CancerTyptes = c('ACC','BLCA','BRCA','CESC','CHOL','COAD','DLBC','ESCA','GBM',
                  'OV','PAAD','PCPG','PRAD','READ','SARC','SKCM','SKCM_M','STAD',
                  'THCA','THYM','UCEC','UCS','UVM'
                  )
-TCGA_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/TCGATumorTissueData'
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/CodingGeneList/CodingGenes.txt'
-HouseKeepingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HouseKeepingGeneList/HK_genes.txt'
-Pathout = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/2.TCGAExpressionStateInference/test'
+TCGA_pathin = 'D:/Project/TumorAntigen/TestData/TCGATumorTissueData'
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes.txt'
+HouseKeepingGenes_pathin = 'D:/Project/TumorAntigen/TestData/HouseKeepingGeneList/HouseKeepingGeneList/HK_genes.txt'
+Pathout = 'D:/Project/TumorAntigen/TestData/Results'
+
+folder_path = paste0(Pathout,'/','TCGA_ExpressPosterior')
+if (!file.exists(folder_path)){
+  dir.create(folder_path)
+}
 
 for (c in 1:length(CancerTyptes)){
-#for (c in 5:5){
+#for (c in 1:1){
   CancerTypte = CancerTyptes[c]
   
   if (CancerTypte != 'SKCM_M' & CancerTypte != 'LAML'){
@@ -134,13 +139,13 @@ for (c in 1:length(CancerTyptes)){
   nonExpressPosterior = Allpi0f0/(Allpi0f0+Allpi1f1)
   
   if (CancerTypte != 'SKCM_M' & CancerTypte != 'LAML'){
-    write.table(ExpressPosterior, file = paste0(Pathout,'/',CancerTypte,'.Primary Tumor.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+    write.table(ExpressPosterior, file = paste0(folder_path,'/',CancerTypte,'.Primary Tumor.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
   }
   if (CancerTypte == 'SKCM_M'){
-    write.table(ExpressPosterior, file = paste0(Pathout,'/',CancerTypte,'.Metastatic.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+    write.table(ExpressPosterior, file = paste0(folder_path,'/',CancerTypte,'.Metastatic.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
   }
   if (CancerTypte == 'LAML'){
-    write.table(ExpressPosterior, file = paste0(Pathout,'/',CancerTypte,'.Primary Blood Derived Cancer - Peripheral Blood.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+    write.table(ExpressPosterior, file = paste0(folder_path,'/',CancerTypte,'.Primary Blood Derived Cancer - Peripheral Blood.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
   }
 }
 

@@ -1,10 +1,17 @@
 library(ggplot2)
 library(mclust)
 
-ExpressionProFilePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/GTEx_ExpressPosterior'
-TPMFilePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/GTExTissueData'
-MaxTPMForCertainProbability_GTEx_Path = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test'
-ThresholdSelectionPics_GTEx = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test'
+ExpressionProFilePath = 'D:/Project/TumorAntigen/TestData/Results/GTEx_ExpressPosterior'
+TPMFilePath = 'D:/Project/TumorAntigen/TestData/GTExTissueData'
+
+Pathout = 'D:/Project/TumorAntigen/TestData/Results'
+
+MaxTPMForCertainProbability_GTEx_Path = paste0(Pathout,'/','MaxTPMForCertainProbability_GTEx')
+if (!file.exists(MaxTPMForCertainProbability_GTEx_Path)){
+  dir.create(MaxTPMForCertainProbability_GTEx_Path)
+}
+
+ThresholdSelectionPics_GTEx = MaxTPMForCertainProbability_GTEx_Path
 
 MaxTPM = c()
 TissueType = c()
@@ -16,8 +23,8 @@ Warning_TissueID = c()
 Warning_TPM = c()
 Warning_Clust = c()
 numrlt = 0
-#for (i in 1:length(FileNames)){
-for (i in 2:2){
+for (i in 1:length(FileNames)){
+#for (i in 1:1){
   FileName = FileNames[i]
   Tissue = gsub(".ExpressPosterior.txt", "", FileName)
   FilePath = paste(ExpressionProFilePath,'/',FileName,sep = '')

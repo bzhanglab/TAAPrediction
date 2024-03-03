@@ -5,10 +5,16 @@ library(reshape)
 
 # HCC
 CancerTyptes = c('HCC')
-HCC_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HCCTumorTissueData'
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/CodingGeneList/CodingGenes_V34.txt'
-HouseKeepingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HouseKeepingGeneList/HK_genes.txt'
-Pathout = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HCC_ExpressPosterior'
+HCC_pathin = 'D:/Project/TumorAntigen/TestData/HCCTumorTissueData/HCCTumorTissueData'
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes_V34.txt'
+HouseKeepingGenes_pathin = 'D:/Project/TumorAntigen/TestData/HouseKeepingGeneList/HouseKeepingGeneList/HK_genes.txt'
+Pathout = 'D:/Project/TumorAntigen/TestData/Results'
+
+folder_path = paste0(Pathout,'/','HCC_ExpressPosterior')
+if (!file.exists(folder_path)){
+  dir.create(folder_path)
+}
+
 
 for (c in 1:length(CancerTyptes)){
   CancerTypte = CancerTyptes[c]
@@ -119,7 +125,7 @@ for (c in 1:length(CancerTyptes)){
   ExpressPosterior = 1 - Allpi0f0/(Allpi0f0+Allpi1f1)
   nonExpressPosterior = Allpi0f0/(Allpi0f0+Allpi1f1)
   
-  write.table(ExpressPosterior, file = paste0(Pathout,'/',CancerTypte,'.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
+  write.table(ExpressPosterior, file = paste0(folder_path,'/',CancerTypte,'.ExpressPosterior','.txt',sep=''), sep = "\t",row.names = TRUE,quote = FALSE)
 }
 
 

@@ -1,10 +1,16 @@
 library(ggplot2)
 library(mclust)
 
-ExpressionProFilePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/TCGA_ExpressPosterior'
-TPMFilePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/TCGATumorTissueData'
-Pathout = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/2.TCGAExpressionStateInference/test'
-ThresholdSelectionPics_TCGA = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/2.TCGAExpressionStateInference/test'
+ExpressionProFilePath = 'D:/Project/TumorAntigen/TestData/Results/TCGA_ExpressPosterior'
+TPMFilePath = 'D:/Project/TumorAntigen/TestData/TCGATumorTissueData'
+Pathout = 'D:/Project/TumorAntigen/TestData/Results'
+
+MaxTPMForCertainProbability_TCGA_Path = paste0(Pathout,'/','MaxTPMForCertainProbability_TCGA')
+if (!file.exists(MaxTPMForCertainProbability_TCGA_Path)){
+  dir.create(MaxTPMForCertainProbability_TCGA_Path)
+}
+
+ThresholdSelectionPics_TCGA = MaxTPMForCertainProbability_TCGA_Path
 
 MaxTPM = c()
 CancerType = c()
@@ -17,7 +23,7 @@ Warning_TPM = c()
 Warning_Clust = c()
 numrlt = 0
 for (i in 1:length(FileNames)){
-#for (i in 9:9){
+#for (i in 1:1){
   FileName = FileNames[i]
   
   if (!grepl(".Primary Tumor.", FileName, fixed=TRUE) & !grepl('SKCM_M.Metastatic.ExpressPosterior.txt',FileName,fixed=TRUE) & !grepl('LAML.Primary Blood Derived Cancer - Peripheral Blood.ExpressPosterior.txt',FileName,fixed=TRUE)){
@@ -60,9 +66,9 @@ Warning = data.frame(SampleID=Warning_SampleID,MaxTPM=Warning_TPM,CancerType=War
 
 Data = data.frame(SampleID = SampleID, MaxTPM = MaxTPM, CancerType = CancerType)
 
-saveRDS(Data, paste0(Pathout,'/MaxTPMForCertainProbability_TCGA.rds'))
+saveRDS(Data, paste0(MaxTPMForCertainProbability_TCGA_Path,'/MaxTPMForCertainProbability_TCGA.rds'))
 
-Data <- readRDS(paste0(Pathout,'/MaxTPMForCertainProbability_TCGA.rds'))
+Data <- readRDS(paste0(MaxTPMForCertainProbability_TCGA_Path,'/MaxTPMForCertainProbability_TCGA.rds'))
 
 pathout = ThresholdSelectionPics_TCGA
 CancerType2 = unique(Data$CancerType)

@@ -1,9 +1,20 @@
 
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/CodingGeneList/CodingGenes.txt'
-ThresholdData <- readRDS("/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/MaxTPMForCertainProbability_TCGA/MaxTPMForCertainProbability_TCGA.rds")
-pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/TCGATumorTissueData'
-Data_TCGA_ExpressMatrix_Path = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/2.TCGAExpressionStateInference/test'
-Data_CancerGenes_TCGA_Path = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/2.TCGAExpressionStateInference/test'
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes.txt'
+ThresholdData <- readRDS("D:/Project/TumorAntigen/TestData/Results/MaxTPMForCertainProbability_TCGA/MaxTPMForCertainProbability_TCGA.rds")
+pathin = 'D:/Project/TumorAntigen/TestData/TCGATumorTissueData'
+
+Pathout <- 'D:/Project/TumorAntigen/TestData/Results'
+
+Data_TCGA_ExpressMatrix_Path = paste0(Pathout,'/','Data_TCGA_ExpressMatrix')
+if (!file.exists(Data_TCGA_ExpressMatrix_Path)){
+  dir.create(Data_TCGA_ExpressMatrix_Path)
+}
+
+Data_CancerGenes_TCGA_Path = paste0(Pathout,'/','Data_CancerGenes_TCGA')
+if (!file.exists(Data_CancerGenes_TCGA_Path)){
+  dir.create(Data_CancerGenes_TCGA_Path)
+}
+
 
 CodingGenesData = read.delim(CodingGenes_pathin, header = TRUE, row.names = 1, sep = "\t")
 
@@ -12,10 +23,6 @@ fileNames = list.files(pathin)
 GenesCandidates_V = data.frame()
 GenesCandidates_F_1 = data.frame()
 GenesCandidates_F_2 = data.frame()
-
-GenesCandidates_C_V = data.frame()
-GenesCandidates_C_F_1 = data.frame()
-GenesCandidates_C_F_2 = data.frame()
 
 totalCancerType = c('GeneName')
 for (i in 1:length(fileNames)){
@@ -107,33 +114,6 @@ for (i in 1:length(fileNames)){
     colnames(GenesCandidates_F_2) = totalCancerType
   }
   
-  if (nrow(GenesCandidates_C_V)==0){
-    GenesCandidates_C_V = data.frame(GeneName=rownames(TCGAData2))
-    GenesCandidates_C_V$CancerType = tmp_V_2$Count
-    colnames(GenesCandidates_C_V) = totalCancerType
-  }else{
-    GenesCandidates_C_V$CancerType = tmp_V_2$Count
-    colnames(GenesCandidates_C_V) = totalCancerType
-  }
-  
-  if (nrow(GenesCandidates_C_F_1)==0){
-    GenesCandidates_C_F_1 = data.frame(GeneName=rownames(TCGAData2))
-    GenesCandidates_C_F_1$CancerType = tmp_F_1_2$Count
-    colnames(GenesCandidates_C_F_1) = totalCancerType
-  }else{
-    GenesCandidates_C_F_1$CancerType = tmp_F_1_2$Count
-    colnames(GenesCandidates_C_F_1) = totalCancerType
-  }
-  
-  if (nrow(GenesCandidates_C_F_2)==0){
-    GenesCandidates_C_F_2 = data.frame(GeneName=rownames(TCGAData2))
-    GenesCandidates_C_F_2$CancerType = tmp_F_2_2$Count
-    colnames(GenesCandidates_C_F_2) = totalCancerType
-  }else{
-    GenesCandidates_C_F_2$CancerType = tmp_F_2_2$Count
-    colnames(GenesCandidates_C_F_2) = totalCancerType
-  }
-  
   tmp_V_matrix <- data.frame(tmp_V)
   tmp_V_matrix$GeneName <- rownames(tmp_V_matrix)
   tmp_V_matrix$Description <- TCGAData[rownames(tmp_V_matrix),]$Description
@@ -184,37 +164,4 @@ for (i in 1:nrow(GenesCandidates_F_2)){
 }
 GenesCandidates_F_22 = GenesCandidates_F_2[GenesCandidates_F_21,]
 write.table(GenesCandidates_F_22, file = paste(pathout,'/CancerGenesRatio_TPM_2.txt',sep=''), sep = "\t",row.names = FALSE,quote = FALSE)
-
-rownames(GenesCandidates_C_V) = GenesCandidates_C_V$GeneName
-GenesCandidates_C_V1 = c()
-for (i in 1:nrow(GenesCandidates_C_V)){
-  gene = GenesCandidates_C_V[i,1]
-  if (!grepl("_PAR_Y", gene, fixed=TRUE)){
-    GenesCandidates_C_V1 = c(GenesCandidates_C_V1,gene)
-  }
-}
-GenesCandidates_C_V2 = GenesCandidates_C_V[GenesCandidates_C_V1,]
-write.table(GenesCandidates_C_V2, file = paste(pathout,'/CancerGenesCount_Pro_0_5.txt',sep=''), sep = "\t",row.names = FALSE,quote = FALSE)
-
-rownames(GenesCandidates_C_F_1) = GenesCandidates_C_F_1$GeneName
-GenesCandidates_C_F_11 = c()
-for (i in 1:nrow(GenesCandidates_C_F_1)){
-  gene = GenesCandidates_C_F_1[i,1]
-  if (!grepl("_PAR_Y", gene, fixed=TRUE)){
-    GenesCandidates_C_F_11 = c(GenesCandidates_C_F_11,gene)
-  }
-}
-GenesCandidates_C_F_12 = GenesCandidates_C_F_1[GenesCandidates_C_F_11,]
-write.table(GenesCandidates_C_F_12, file = paste(pathout,'/CancerGenesCount_TPM_1.txt',sep=''), sep = "\t",row.names = FALSE,quote = FALSE)
-
-rownames(GenesCandidates_C_F_2) = GenesCandidates_C_F_2$GeneName
-GenesCandidates_C_F_21 = c()
-for (i in 1:nrow(GenesCandidates_C_F_2)){
-  gene = GenesCandidates_C_F_2[i,1]
-  if (!grepl("_PAR_Y", gene, fixed=TRUE)){
-    GenesCandidates_C_F_21 = c(GenesCandidates_C_F_21,gene)
-  }
-}
-GenesCandidates_C_F_22 = GenesCandidates_C_F_2[GenesCandidates_C_F_21,]
-write.table(GenesCandidates_C_F_22, file = paste(pathout,'/CancerGenesCount_TPM_2.txt',sep=''), sep = "\t",row.names = FALSE,quote = FALSE)
 

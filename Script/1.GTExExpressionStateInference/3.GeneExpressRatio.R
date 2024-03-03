@@ -1,8 +1,19 @@
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/CodingGeneList/CodingGenes.txt'
-ThresholdData <- readRDS('/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/MaxTPMForCertainProbability_GTEx/MaxTPMForCertainProbability_GTEx.rds')
-GTExTissueDataPath <- '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/Data/GTExTissueData'
-Data_GTEx_ExpressMatrixPath <- '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test/matrix'
-DormantGenePath = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test/Data_DormantGenes'
+
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes.txt'
+ThresholdData <- readRDS('D:/Project/TumorAntigen/TestData/Results/MaxTPMForCertainProbability_GTEx/MaxTPMForCertainProbability_GTEx.rds')
+GTExTissueDataPath <- 'D:/Project/TumorAntigen/TestData/GTExTissueData'
+
+Pathout <- 'D:/Project/TumorAntigen/TestData/Results'
+
+Data_GTEx_ExpressMatrixPath = paste0(Pathout,'/','Data_GTEx_ExpressMatrix')
+if (!file.exists(Data_GTEx_ExpressMatrixPath)){
+  dir.create(Data_GTEx_ExpressMatrixPath)
+}
+
+DormantGenePath = paste0(Pathout,'/','Data_DormantGenes')
+if (!file.exists(DormantGenePath)){
+  dir.create(DormantGenePath)
+}
 
 CodingGenesData = read.delim(CodingGenes_pathin, header = TRUE, row.names = 1, sep = "\t")
 fileNames = list.files(GTExTissueDataPath)

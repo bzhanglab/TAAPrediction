@@ -1,9 +1,20 @@
 
-CodingGenes_pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/CodingGeneList/CodingGenes_V34.txt'
-ThresholdData <- readRDS("/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/MaxTPMForCertainProbability_HCC/MaxTPMForCertainProbability_HCC.rds")
-pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/HCCTumorTissueData'
-Data_HCC_ExpressMatrix_Path = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/Data_HCC_ExpressMatrix'
-Data_CancerGenes_HCC_Path = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/Data/Data_CancerGenes_HCC'
+CodingGenes_pathin = 'D:/Project/TumorAntigen/TestData/CodingGeneList/CodingGeneList/CodingGenes_V34.txt'
+ThresholdData <- readRDS("D:/Project/TumorAntigen/TestData/Results/MaxTPMForCertainProbability_HCC/MaxTPMForCertainProbability_HCC.rds")
+pathin = 'D:/Project/TumorAntigen/TestData/HCCTumorTissueData/HCCTumorTissueData'
+
+Pathout <- 'D:/Project/TumorAntigen/TestData/Results'
+
+Data_HCC_ExpressMatrix_Path = paste0(Pathout,'/','Data_HCC_ExpressMatrix')
+if (!file.exists(Data_HCC_ExpressMatrix_Path)){
+  dir.create(Data_HCC_ExpressMatrix_Path)
+}
+
+Data_CancerGenes_HCC_Path = paste0(Pathout,'/','Data_CancerGenes_HCC')
+if (!file.exists(Data_CancerGenes_HCC_Path)){
+  dir.create(Data_CancerGenes_HCC_Path)
+}
+
 
 CodingGenesData = read.delim(CodingGenes_pathin, header = TRUE, row.names = 1, sep = "\t")
 
@@ -12,10 +23,6 @@ fileNames = list.files(pathin)
 GenesCandidates_V = data.frame()
 GenesCandidates_F_1 = data.frame()
 GenesCandidates_F_2 = data.frame()
-
-GenesCandidates_C_V = data.frame()
-GenesCandidates_C_F_1 = data.frame()
-GenesCandidates_C_F_2 = data.frame()
 
 totalCancerType = c('GeneName')
 for (i in 1:length(fileNames)){
@@ -105,33 +112,6 @@ for (i in 1:length(fileNames)){
   }else{
     GenesCandidates_F_2$CancerType = tmp_F_2_2$Ratio
     colnames(GenesCandidates_F_2) = totalCancerType
-  }
-  
-  if (nrow(GenesCandidates_C_V)==0){
-    GenesCandidates_C_V = data.frame(GeneName=rownames(HCCData2))
-    GenesCandidates_C_V$CancerType = tmp_V_2$Count
-    colnames(GenesCandidates_C_V) = totalCancerType
-  }else{
-    GenesCandidates_C_V$CancerType = tmp_V_2$Count
-    colnames(GenesCandidates_C_V) = totalCancerType
-  }
-  
-  if (nrow(GenesCandidates_C_F_1)==0){
-    GenesCandidates_C_F_1 = data.frame(GeneName=rownames(HCCData2))
-    GenesCandidates_C_F_1$CancerType = tmp_F_1_2$Count
-    colnames(GenesCandidates_C_F_1) = totalCancerType
-  }else{
-    GenesCandidates_C_F_1$CancerType = tmp_F_1_2$Count
-    colnames(GenesCandidates_C_F_1) = totalCancerType
-  }
-  
-  if (nrow(GenesCandidates_C_F_2)==0){
-    GenesCandidates_C_F_2 = data.frame(GeneName=rownames(HCCData2))
-    GenesCandidates_C_F_2$CancerType = tmp_F_2_2$Count
-    colnames(GenesCandidates_C_F_2) = totalCancerType
-  }else{
-    GenesCandidates_C_F_2$CancerType = tmp_F_2_2$Count
-    colnames(GenesCandidates_C_F_2) = totalCancerType
   }
   
   tmp_V_matrix <- data.frame(tmp_V)

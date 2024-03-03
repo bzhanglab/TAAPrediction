@@ -1,9 +1,9 @@
 # Dormant gene identification
-pathin = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test/Data_DormantGenes/DormantGenesRatio_Pro_0_5.txt'
+pathin = 'D:/Project/TumorAntigen/TestData/Results/Data_DormantGenes/DormantGenesRatio_Pro_0_5.txt'
 DormantGenesRatio = read.delim(pathin, header = TRUE, row.names = 1, sep = "\t")
 DormantGenesRatio$Testis <- NULL
 
-Pathout = '/Users/xinpeiyi/Library/Mobile Documents/com~apple~CloudDocs/Documents/AssistantProfessor/Project/TumorAntigen/Code/CancerGenesProteins/8.Github/TAAPrediction/1.GTExExpressionStateInference/test/Data_DormantGenes'
+Pathout = 'D:/Project/TumorAntigen/TestData/Results/Data_DormantGenes'
 
 names = c()
 numrlt = 0
