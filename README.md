@@ -34,7 +34,7 @@ DeepRescore2
 - Please go to https://zenodo.org/records/10703306 and download **GTExTissueData.zip (54 normal tissue RNA-seq data)**, **TCGATumorTissueData.zip (33 tumor tissues RNA-seq data)**, **HCCTumorTissueData.zip (HCC tumor tissue RNA-seq data)**, **CodingGeneList.zip**， **HouseKeepingGeneList.zip** used in our manuscript. Unzip these files as the input for TAAPrediction. 
 
 ### Run TAAPrediction
-- Please open the program files in order, modify both the input and output file paths, and run using the R language
+- Please open the program files in order, modify both the input and output file paths, and run using the R language.
 
 ## Output
 
