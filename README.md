@@ -45,9 +45,6 @@ TAAPrediction will output results of each step, including
 * Data_GTEx_ExpressMatrix
 * Data_TCGA_ExpressMatrix
 * Data_HCC_ExpressMatrix
-* MaxTPMForCertainProbability_GTEx
-* MaxTPMForCertainProbability_TCGA
-* MaxTPMForCertainProbability_HCC
 * Data_DormantGenes
 * Data_CancerGenes_TCGA
 * Data_CancerGenes_HCC
